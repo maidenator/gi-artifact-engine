@@ -1,5 +1,10 @@
 #pragma once
+#include <array>
+#include <cassert>
 #include <cmath>
+#include <cstddef>
+#include <cstdint>
+#include <string>
 #include "types.hpp"
 #include "random_utils.hpp"
 #include "distributions.hpp"
@@ -84,7 +89,7 @@ inline Artifact generateArtifactSubstats(MainStat mainStat, rng::Xoshiro256 &rng
     bool isFourLiner = rng::fastUniformDouble(rng) < distributions::FOUR_LINER_CHANCE;
 
     // 2. Initialize a pool of 10 unselected Substats
-    std::array<bool, 10> selectedStats = {false};
+    std::array<bool, distributions::ALL_SUBSTATS.size()> selectedStats = {false};
     size_t substatSize = distributions::ALL_SUBSTATS.size();
 
     // 3. Iterate through the substats and mark mainStat as selected so we cannot pick it again
@@ -188,7 +193,7 @@ inline void upgradeArtifactOnce(Artifact &art, rng::Xoshiro256 &rng) {
     size_t totalPoolSize = distributions::ALL_SUBSTATS.size();
     
     // Initialize a pool of 10 unselected Substats
-    std::array<bool, 10> selectedStats = {false};
+    std::array<bool, distributions::ALL_SUBSTATS.size()> selectedStats = {false};
 
     // Mark the Main Stat as selected
     if (auto matchingSub = distributions::mainStatToSubStat(art.mainStat.type)) {
@@ -214,7 +219,7 @@ inline void upgradeArtifactOnce(Artifact &art, rng::Xoshiro256 &rng) {
     bool isFourLiner = (art.substatCount == 4);
 
     if (!isFourLiner) {
-        // Case A: Adding the 4th substat (3-liner upgradcleares to 4-liner)
+        // Case A: Adding the 4th substat (3-liner upgrades to 4-liner)
         uint32_t totalWeight = 0;
         for (size_t j = 0; j < totalPoolSize; ++j) {
             if (!selectedStats[j]) {

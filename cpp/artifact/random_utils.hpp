@@ -20,7 +20,7 @@ class Xoshiro256 {
     public:
         explicit Xoshiro256(uint64_t seed) {
             /*
-                Mini SplitMix65 generator to expand a single seed
+                Mini SplitMix64 generator to expand a single seed
                 into 4 healthy, non-zero state values
             */
            uint64_t z = seed + GOLDEN_RATIO_CONST;
@@ -52,11 +52,13 @@ class Xoshiro256 {
 };
 
 /**
- * Generates a random number between 0 and bound - 1
- * uses lemire's algorithm to avoid modulo bias
- * 
- * @param bound upper limit for the random number
- * @param rng the xoshiro256 random engine
+ * Generates a random integer in the range [0, bound - 1] without modulo bias.
+ * Uses Lemire's method: multiplying the 64-bit random value by the bound
+ * and keeping the high 64 bits maps the output evenly onto the range.
+ * A rejection step removes the few values that would otherwise be overrepresented.
+ *
+ * @param bound upper limit (exclusive) for the random number
+ * @param rng the Xoshiro256 random engine
  */
 inline uint32_t fastUniform(int32_t bound, Xoshiro256 &rng) {
     assert(bound > 0 && "Bound must be a positive integer");
@@ -64,7 +66,7 @@ inline uint32_t fastUniform(int32_t bound, Xoshiro256 &rng) {
     uint32_t ubound = static_cast<uint32_t>(bound);
     uint64_t x = rng();
     
-    // Prevents overflow from the 64-bit rng output    
+    // Prevents overflow from the 64-bit rng output 
     __uint128_t m = static_cast<__uint128_t>(x) * ubound;
     uint32_t l = static_cast<uint32_t>(m);
 

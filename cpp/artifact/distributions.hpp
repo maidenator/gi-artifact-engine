@@ -4,6 +4,7 @@
 #include <array>
 #include <span>
 #include <cstdint>
+#include <optional>
 #include "types.hpp"
 
 namespace distributions {
@@ -75,6 +76,19 @@ constexpr std::array<MainStatWeight, CIRCLET_MAIN_STAT_COUNT> CIRCLET_MAIN_STATS
     {ArtifactMainStat:: elementalMastery,   4.00},
     //                        Sum should be 100
 }};
+template <std::size_t N>
+constexpr double sumWeights(const std::array<MainStatWeight, N> &arr) {
+    double total = 0.0;
+    for (const auto &w : arr) total += w.weight;
+    return total;
+}
+constexpr bool nearlyEqual(double a, double b) {
+    return (a > b ? a - b : b - a) < 0.0001;
+}
+
+static_assert(nearlyEqual(sumWeights(SANDS_MAIN_STATS), 100.0), "Sands weights must sum to 100");
+static_assert(nearlyEqual(sumWeights(GOBLET_MAIN_STATS), 100.0), "Goblet weights must sum to 100");
+static_assert(nearlyEqual(sumWeights(CIRCLET_MAIN_STATS), 100.0), "Circlet weights must sum to 100");
 
 /*
     Returns a span containing the main stat along
@@ -144,11 +158,11 @@ constexpr inline double getMainStatValue(ArtifactMainStat stat, int level, int r
     return base + ((max - base) / 20.0) * level;
 }
 
-constexpr std::array<ArtifactSubstat, 10> ALL_SUBSTATS = {{
+inline constexpr std::array<ArtifactSubstat, 10> ALL_SUBSTATS = {{
     ArtifactSubstat::critDmg,
     ArtifactSubstat::critRate,
     ArtifactSubstat::elementalMastery,
-    // ArtifactSubstat::energyRecharge,
+    ArtifactSubstat::energyRecharge,
     ArtifactSubstat::atkPercent,
     ArtifactSubstat::atkFlat,
     ArtifactSubstat::hpPercent,
@@ -156,6 +170,7 @@ constexpr std::array<ArtifactSubstat, 10> ALL_SUBSTATS = {{
     ArtifactSubstat::defPercent,
     ArtifactSubstat::defFlat
 }};
+static_assert(ALL_SUBSTATS.size() == 10, "Expected 10 substat types");
 
 constexpr bool isMainStatConflict(ArtifactMainStat mainStat, ArtifactSubstat subStat) {
     const auto mainVal = static_cast<int>(mainStat);
