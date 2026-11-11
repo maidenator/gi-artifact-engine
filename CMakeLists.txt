@@ -13,8 +13,10 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(json)
 
-# dummy main file for now:
-add_executable(gi_artifact_engine cpp/main.cpp)
+# main program
+add_executable(gi_artifact_engine
+    cpp/main.cpp
+)
 
 # record Artifact Engine, CMake and compiler versions
 target_compile_definitions(gi_artifact_engine PRIVATE
@@ -35,3 +37,13 @@ target_include_directories(gi_artifact_engine PRIVATE ${CMAKE_SOURCE_DIR}/cpp)
 
 # link nlohmann/json
 target_link_libraries(gi_artifact_engine PRIVATE nlohmann_json::nlohmann_json)
+
+# header check (not built by default)
+add_library(check_headers STATIC EXCLUDE_FROM_ALL cpp/check_headers.cpp)
+target_include_directories(check_headers PRIVATE ${CMAKE_SOURCE_DIR}/cpp)
+target_link_libraries(check_headers PRIVATE nlohmann_json::nlohmann_json)
+if(MSVC)
+    target_compile_options(check_headers PRIVATE /W4)
+else()
+    target_compile_options(check_headers PRIVATE -Wall -Wextra -Wpedantic)
+endif()

@@ -148,7 +148,7 @@ constexpr std::array<ArtifactSubstat, 10> ALL_SUBSTATS = {{
     ArtifactSubstat::critDmg,
     ArtifactSubstat::critRate,
     ArtifactSubstat::elementalMastery,
-    ArtifactSubstat::energyRecharge,
+    // ArtifactSubstat::energyRecharge,
     ArtifactSubstat::atkPercent,
     ArtifactSubstat::atkFlat,
     ArtifactSubstat::hpPercent,

@@ -2,6 +2,10 @@
 #include <nlohmann/json.hpp>
 #include <cstdlib>  // for std::system
 
+#include <chrono>
+#include <iostream>
+#include <thread>
+
 void clearConsole() {
 #ifdef _WIN32
     std::system("cls");
@@ -10,9 +14,18 @@ void clearConsole() {
 #endif
 }
 
+void spinner(int frames) {
+    const char* symbols[] = {"|", "/", "-", "\\"};
+    for (int i = 0; i < frames; ++i) {
+        std::cout << "\rBuilding " << symbols[i % 4] << std::flush;
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+    clearConsole();
+}
 
 int main() {
     clearConsole();
+    spinner(20); 
     std::cout << "GI-Artifact-Engine v" << GI_VERSION << "\n";
     std::cout << "=========================\n\n";
     std::cout << "C++ standard: " << __cplusplus << "\n";

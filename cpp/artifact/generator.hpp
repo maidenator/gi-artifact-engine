@@ -85,7 +85,7 @@ inline Artifact generateArtifactSubstats(MainStat mainStat, rng::Xoshiro256 &rng
 
     // 2. Initialize a pool of 10 unselected Substats
     std::array<bool, 10> selectedStats = {false};
-    int substatSize = distributions::ALL_SUBSTATS.size();
+    size_t substatSize = distributions::ALL_SUBSTATS.size();
 
     // 3. Iterate through the substats and mark mainStat as selected so we cannot pick it again
     if (auto matchingSub = distributions::mainStatToSubStat(mainStat.type)) {
@@ -214,7 +214,7 @@ inline void upgradeArtifactOnce(Artifact &art, rng::Xoshiro256 &rng) {
     bool isFourLiner = (art.substatCount == 4);
 
     if (!isFourLiner) {
-        // Case A: Adding the 4th substat (3-liner upgrades to 4-liner)
+        // Case A: Adding the 4th substat (3-liner upgradcleares to 4-liner)
         uint32_t totalWeight = 0;
         for (size_t j = 0; j < totalPoolSize; ++j) {
             if (!selectedStats[j]) {

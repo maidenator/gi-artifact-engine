@@ -73,5 +73,5 @@ struct Artifact {
     int level = 0;
 
     std::array<SubstatRoll, 4> subStats;
-    int substatCount = 0;
+    size_t substatCount = 0;
 };
