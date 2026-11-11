@@ -23,6 +23,13 @@ target_compile_definitions(gi_artifact_engine PRIVATE
     COMPILER_VERSION_USED="${CMAKE_CXX_COMPILER_VERSION}"
 )
 
+# warnings
+if(MSVC)
+    target_compile_options(gi_artifact_engine PRIVATE /W4)
+else()
+    target_compile_options(gi_artifact_engine PRIVATE -Wall -Wextra -Wpedantic)
+endif()
+
 # #include "artifact/..."
 target_include_directories(gi_artifact_engine PRIVATE ${CMAKE_SOURCE_DIR}/cpp)
 
