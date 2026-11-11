@@ -49,4 +49,4 @@ int main() {
     std::cout << "All rules passed\n";
     std::cout << "4-liner rate: " << fourLiners / 100000.0
               << " (expected " << distributions::FOUR_LINER_CHANCE << ")\n";
-// }
+}
