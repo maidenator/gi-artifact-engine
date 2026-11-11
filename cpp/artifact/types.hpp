@@ -62,16 +62,14 @@ struct MainStat {
 };
 
 struct Artifact {
-    std::optional<std::string> id;
-    int rarity;
-
-    std::string setName;
-    std::optional<std::string> pieceName;
+    std::string id;
+    std::string setKey; // Supplied by the front end, not used during generation.
     ArtifactSlot slot;
-    
-    MainStat mainStat;
+
+    int rarity;
     int level = 0;
 
+    MainStat mainStat;
     std::array<SubstatRoll, 4> subStats;
     size_t substatCount = 0;
 };

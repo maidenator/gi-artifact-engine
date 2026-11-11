@@ -26,7 +26,7 @@ void spinner(int frames) {
 int main() {
     clearConsole();
     spinner(20); 
-    std::cout << "GI-Artifact-Engine v" << GI_VERSION << "\n";
+    std::cout << "GI Artifact Engine v" << GI_VERSION << "\n";
     std::cout << "=========================\n\n";
     std::cout << "C++ standard: " << __cplusplus << "\n";
 
