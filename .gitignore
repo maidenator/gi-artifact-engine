@@ -1,0 +1,15 @@
+# CMake build output
+build/
+build-web/
+
+# VS Code user-specific files
+.vscode/*
+!.vscode/c_cpp_properties.json
+!.vscode/settings.json
+!.vscode/tasks.json
+
+# Windows
+*.exe
+*.obj
+*.o
+*.pdb
