@@ -1,5 +1,5 @@
 #pragma once
-#include "types.hpp"
+#include "../artifact/types.hpp"
 #include <string_view>
 
 namespace good {

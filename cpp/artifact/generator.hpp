@@ -164,9 +164,9 @@ inline std::string generateArtifactId(rng::Xoshiro256 &rng) {
  * @param rng Reference to the Xoshiro256 random engine.
  * @return Artifact The fully generated artifact object.
  */
-inline Artifact generateArtifact(rng::Xoshiro256 &rng) {
+inline Artifact generateArtifact(rng::Xoshiro256 &rng, int rarity) {
     Artifact art;
-
+    art.rarity = rarity;
     art.id = generateArtifactId(rng);
     art.slot = static_cast<ArtifactSlot>(rng::fastUniformRange(0, 4, rng));
     art.level = 0;
@@ -179,6 +179,12 @@ inline Artifact generateArtifact(rng::Xoshiro256 &rng) {
     art.subStats = substatPackage.subStats;
 
     return art;
+}
+/**
+ * 5-star default rarity
+ */
+inline Artifact generateArtifact(rng::Xoshiro256 &rng) {
+    return generateArtifact(rng, 5);
 }
 
 /**

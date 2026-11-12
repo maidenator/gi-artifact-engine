@@ -6,6 +6,10 @@
 #include <iostream>
 #include <thread>
 
+
+#include "artifact/generator.hpp"
+#include "json_utils/good_export.hpp"
+
 void clearConsole() {
 #ifdef _WIN32
     std::system("cls");
@@ -45,6 +49,16 @@ int main() {
               << NLOHMANN_JSON_VERSION_MAJOR << "."
               << NLOHMANN_JSON_VERSION_MINOR << "."
               << NLOHMANN_JSON_VERSION_PATCH << "\n";
+
+
+    // Testing
+    // clearConsole();
+
+    // rng::Xoshiro256 rng(42);
+    // Artifact a = generator::generateArtifact(rng);
+    // std::cout << goodexport::artifactToGood(a).dump(2) << "\n";
+    // generator::upgradeArtifactOnce(a, rng);
+    // std::cout << goodexport::artifactToGood(a).dump(2) << "\n";
 
     return 0;
 }
