@@ -109,4 +109,4 @@ inline int32_t fastUniformRange(int32_t min, int32_t max, Xoshiro256 &rng) {
 inline double fastUniformDouble(Xoshiro256 &rng) {
     return (rng() >> 11) * 0x1.0p-53;
 }
-}
+} // namespace rng

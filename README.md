@@ -2,7 +2,6 @@
 A Standalone Genshin Impact Artifact Engine developed in C++
 
 ## Build and Run:
-(These currently do nothing as im still working on the CLI, I'm not even sure if this should be a CLI) 
 ### Windows: g++ via MSYS2
 ```powershell
 .\winscripts\build.ps1
@@ -15,7 +14,7 @@ A Standalone Genshin Impact Artifact Engine developed in C++
 ./linuxscripts/sanitycheck.sh
 ```
 
-## JSON format  
+## JSON format
 Artifacts are exported in the [GOOD format](https://frzyc.github.io/genshin-optimizer/#/doc), so they can be imported into Genshin Optimizer and similar tools.
 
 Each artifact has these required fields:
@@ -47,3 +46,37 @@ Example:
   ]
 }
 ```
+
+## CLI
+The engine runs a simulation and prints the results. Run it from the project root after building.
+
+```bash
+./build/gi_artifact_engine [options]
+```
+
+On Windows, use `.\build\gi_artifact_engine.exe`.
+
+| Option | Meaning | Default |
+|---|---|---|
+| `--seed N` | RNG seed, for reproducible runs | 42 |
+| `--resin N` | Resin to spend, 20 per run (minimum 20) | 160 |
+| `--topk N` | Number of artifacts to show (must be above 0) | 10 |
+| `--metric NAME` | `cv`, `critrate`, `critdmg`, `er`, `em`, `atk`, `hp` | `cv` |
+| `--set KEY` | GOOD set key | `GladiatorsFinale` |
+| `--out FILE` | Write the shown artifacts as GOOD JSON | none |
+| `--luck` | Show the 4-liner z-score | off |
+| `--verbose` | Print each shown artifact as JSON | off |
+| `--no-clear` | Don't clear the console at start | off |
+| `--help` | Show the options | |
+
+Examples:
+
+```bash
+./build/gi_artifact_engine --resin 16000 --topk 5 --luck
+./build/gi_artifact_engine --seed 7 --resin 16000 --topk 5 --out top.json
+```
+
+Notes:
+
+- Only `cv` scores are implemented so far. Other metrics currently score 0.
+- Top-K selection isn't finished, so the artifacts shown are not yet the best by the chosen metric.

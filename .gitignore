@@ -1,11 +1,15 @@
 # CMake build output
 build/
 build-web/
+build-release/
+build-debug/
+
+# clangd index cache
+.cache/
 
 # VS Code user-specific files
 .vscode/*
 !.vscode/c_cpp_properties.json
-!.vscode/settings.json
 !.vscode/tasks.json
 
 # Windows

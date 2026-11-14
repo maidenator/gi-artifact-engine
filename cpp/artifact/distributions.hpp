@@ -235,4 +235,4 @@ constexpr std::optional<ArtifactSubstat> mainStatToSubStat(ArtifactMainStat main
     }
 }
 
-}
+} // namespace distributions

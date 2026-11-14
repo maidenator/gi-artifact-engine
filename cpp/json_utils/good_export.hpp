@@ -12,7 +12,7 @@ namespace goodexport {
  * @param setName GOOD setKey, such as "GladiatorsFinale"
  * @return nlohmann::json The GOOD-formatted artifact
  */
-json artifactToGood(Artifact &art, const std::string &setName) {
+inline json artifactToGood(const Artifact &art, const std::string &setName) {
     json artifact;
     artifact["setKey"] = setName; // Must be compliant of the GOOD setKey format
     artifact["slotKey"] = good::slotKeyFor(art.slot);
@@ -23,7 +23,7 @@ json artifactToGood(Artifact &art, const std::string &setName) {
     artifact["mainStatKey"] = good::statKeyFor(art.mainStat.type);
 
     artifact["substats"] = json::array();
-    for(std::size_t i = 0; i < art.substatCount; i++) {
+    for(std::size_t i = 0; i < art.substatCount; ++i) {
         artifact["substats"].push_back({
             {"key", good::statKeyFor(art.subStats[i].type)},
             {"value", art.subStats[i].value}
@@ -39,7 +39,7 @@ json artifactToGood(Artifact &art, const std::string &setName) {
 /**
  * Same as above, using a placeholder set for testing.
  */
-json artifactToGood(Artifact &art) {
+inline json artifactToGood(const Artifact &art) {
     return artifactToGood(art, "GladiatorsFinale");
 }
 } // namespace goodexport

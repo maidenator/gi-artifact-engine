@@ -264,4 +264,15 @@ inline void upgradeArtifactOnce(Artifact &art, rng::Xoshiro256 &rng) {
     art.level += 4;
     art.mainStat.value = distributions::getMainStatValue(art.mainStat.type, art.level);
 }
+
+inline void upgradeToMax(Artifact &art, rng::Xoshiro256 &rng) {
+    // For now we assume that non 5* artifacts are automatically 4* 
+    // As most players are not concerned about 3* - 1* artifacts
+    const int maxLevel = (art.rarity == 5) ? 20 : 16; 
+
+    while(art.level < maxLevel) {
+        upgradeArtifactOnce(art, rng);
+    }
+}
+
 } // namespace generator
