@@ -7,11 +7,11 @@
 // Artifact Slot
 inline std::ostream& operator<<(std::ostream& out, const ArtifactSlot value) {
     switch(value) {
-        case ArtifactSlot::flower: out << "Flower of Life"; break;
-        case ArtifactSlot::feather: out << "Plume of Death"; break;
-        case ArtifactSlot::sands: out << "Sands of Eon"; break;
-        case ArtifactSlot::goblet: out << "Goblet of Eonothem"; break;
-        case ArtifactSlot::circlet: out << "Circlet of Logos"; break;
+        case ArtifactSlot::flower:              out << "Flower of Life"; break;
+        case ArtifactSlot::feather:             out << "Plume of Death"; break;
+        case ArtifactSlot::sands:               out << "Sands of Eon"; break;
+        case ArtifactSlot::goblet:              out << "Goblet of Eonothem"; break;
+        case ArtifactSlot::circlet:             out << "Circlet of Logos"; break;
         default: out << "Unknown"; break;
     }
     return out;
@@ -20,19 +20,19 @@ inline std::ostream& operator<<(std::ostream& out, const ArtifactSlot value) {
 // Artifact Substat
 inline std::ostream& operator<<(std::ostream& out, const ArtifactSubstat value) {
     switch(value) {
-        case ArtifactSubstat::critDmg: out << "Crit DMG %"; break;
-        case ArtifactSubstat::critRate: out << "Crit Rate %"; break;
+        case ArtifactSubstat::critDmg:          out << "Crit DMG %"; break;
+        case ArtifactSubstat::critRate:         out << "Crit Rate %"; break;
 
         case ArtifactSubstat::elementalMastery: out << "Elemental Mastery"; break;
-        case ArtifactSubstat::energyRecharge: out << "Energy Recharge%"; break;
+        case ArtifactSubstat::energyRecharge:   out << "Energy Recharge%"; break;
 
-        case ArtifactSubstat::atkPercent: out << "ATK%"; break;
-        case ArtifactSubstat::hpPercent: out << "HP%"; break;
-        case ArtifactSubstat::defPercent: out << "DEF%"; break;
+        case ArtifactSubstat::atkPercent:       out << "ATK%"; break;
+        case ArtifactSubstat::hpPercent:        out << "HP%"; break;
+        case ArtifactSubstat::defPercent:       out << "DEF%"; break;
 
-        case ArtifactSubstat::atkFlat: out << "ATK"; break;
-        case ArtifactSubstat::hpFlat: out << "HP"; break;
-        case ArtifactSubstat::defFlat: out << "DEF"; break;
+        case ArtifactSubstat::atkFlat:          out << "ATK"; break;
+        case ArtifactSubstat::hpFlat:           out << "HP"; break;
+        case ArtifactSubstat::defFlat:          out << "DEF"; break;
 
         default: out << "Unknown"; break;
 
