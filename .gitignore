@@ -10,7 +10,6 @@ build-debug/
 # VS Code user-specific files
 .vscode/*
 !.vscode/c_cpp_properties.json
-!.vscode/tasks.json
 
 # Windows
 *.exe
