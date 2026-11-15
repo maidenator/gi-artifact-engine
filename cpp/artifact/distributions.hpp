@@ -9,18 +9,18 @@
 
 namespace distributions {
 
-constexpr int RESIN_PER_RUN = 20;                   // One run costs 20 Resin
-constexpr int BASE_5_STAR_COUNT = 1;                // One 5* Artifact per run
-constexpr double DOUBLE_5_STAR_CHANCE = 0.065;      // 6.5% Chance to get a second 5* Artifact per run
-constexpr double SET_SPLIT_RATE = 0.50;             // Two sets per domain are equally split
-constexpr double SLOT_SPLIT_RATE = 0.20;            // Each Artifact Slot has an equal likelihood (20%) of dropping
-constexpr double FOUR_LINER_CHANCE = 0.20;          // A 5* Artifact has a 20% chance to spawn with 4 substats instead of 3
+constexpr int    RESIN_PER_RUN =            20;             // One run costs 20 Resin
+constexpr int    BASE_5_STAR_COUNT =        1;              // One 5* Artifact per run
+constexpr double DOUBLE_5_STAR_CHANCE =     0.065;          // 6.5% Chance to get a second 5* Artifact per run
+constexpr double SET_SPLIT_RATE =           0.50;           // Two sets per domain are equally split
+constexpr double SLOT_SPLIT_RATE =          0.20;           // Each Artifact Slot has an equal likelihood (20%) of dropping
+constexpr double FOUR_LINER_CHANCE =        0.20;           // A 5* Artifact has a 20% chance to spawn with 4 substats instead of 3
 
-constexpr int FLOWER_MAIN_STAT_COUNT = 1;
-constexpr int FEATHER_MAIN_STAT_COUNT = 1;
-constexpr int SANDS_MAIN_STAT_COUNT = 5;
-constexpr int GOBLET_MAIN_STAT_COUNT = 12;
-constexpr int CIRCLET_MAIN_STAT_COUNT = 7;
+constexpr int    FLOWER_MAIN_STAT_COUNT =   1;
+constexpr int    FEATHER_MAIN_STAT_COUNT =  1;
+constexpr int    SANDS_MAIN_STAT_COUNT =    5;
+constexpr int    CIRCLET_MAIN_STAT_COUNT =  7;
+constexpr int    GOBLET_MAIN_STAT_COUNT =   12;
 
 struct MainStatWeight {
     ArtifactMainStat stat;
@@ -86,8 +86,8 @@ constexpr bool nearlyEqual(double a, double b) {
     return (a > b ? a - b : b - a) < 0.0001;
 }
 
-static_assert(nearlyEqual(sumWeights(SANDS_MAIN_STATS), 100.0), "Sands weights must sum to 100");
-static_assert(nearlyEqual(sumWeights(GOBLET_MAIN_STATS), 100.0), "Goblet weights must sum to 100");
+static_assert(nearlyEqual(sumWeights(SANDS_MAIN_STATS), 100.0),   "Sands weights must sum to 100");
+static_assert(nearlyEqual(sumWeights(GOBLET_MAIN_STATS), 100.0),  "Goblet weights must sum to 100");
 static_assert(nearlyEqual(sumWeights(CIRCLET_MAIN_STATS), 100.0), "Circlet weights must sum to 100");
 
 /*
