@@ -2,7 +2,7 @@
 #include "distributions.hpp"
 #include <iostream>
 
-// Conveniently prints my enum values without needing to wrap them into a function
+// Conveniently prints enum values without needing to wrap them into a function
 
 // Artifact Slot
 inline std::ostream& operator<<(std::ostream& out, const ArtifactSlot value) {
