@@ -16,3 +16,6 @@ build-debug/
 *.obj
 *.o
 *.pdb
+
+# Linux
+*.kate-swp
