@@ -23,13 +23,15 @@ class Xoshiro256 {
                 Mini SplitMix64 generator to expand a single seed
                 into 4 healthy, non-zero state values
             */
-           uint64_t z = seed + GOLDEN_RATIO_CONST;
-           for(int i = 0; i < 4; ++i) {
+            uint64_t state = seed;
+            for (int i = 0; i < 4; ++i) {
+                state += GOLDEN_RATIO_CONST;
+                uint64_t z = state;
                 z = (z ^ (z >> 30)) * MIXER_MULTIPLIER_1;
                 z = (z ^ (z >> 27)) * MIXER_MULTIPLIER_2;
 
                 s[i] = z ^ (z >> 31);
-           } 
+            }
         }
 
         inline uint64_t operator() () {
@@ -63,21 +65,21 @@ class Xoshiro256 {
 inline uint32_t fastUniform(int32_t bound, Xoshiro256 &rng) {
     assert(bound > 0 && "Bound must be a positive integer");
 
-    uint32_t ubound = static_cast<uint32_t>(bound);
+    uint64_t ubound = static_cast<uint64_t>(bound);
     uint64_t x = rng();
     
     // Prevents overflow from the 64-bit rng output 
     __uint128_t m = static_cast<__uint128_t>(x) * ubound;
-    uint32_t l = static_cast<uint32_t>(m);
+    uint64_t l = static_cast<uint64_t>(m);
 
-    if (l < ubound) {
-        uint32_t threshold = -ubound % ubound;
-        while (l < threshold) {
-            x = rng();
-            m = static_cast<__uint128_t>(x) * ubound;
-            l = static_cast<uint32_t>(m);
+        if (l < ubound) {
+            uint64_t threshold = -ubound % ubound;
+            while (l < threshold) {
+                x = rng();
+                m = static_cast<__uint128_t>(x) * ubound;
+                l = static_cast<uint64_t>(m);
+            }
         }
-    }
 
     return static_cast<uint32_t>(m >> 64);
 }
